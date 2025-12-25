@@ -43,19 +43,21 @@
    "fieldname": "type",
    "fieldtype": "Select",
    "label": "Type",
-   "options": "Issue\nReturn"
+   "options": "Issue\nReturn",
+   "reqd": 1
   },
   {
    "fieldname": "date",
    "fieldtype": "Date",
-   "label": "Date"
+   "label": "Date",
+   "reqd": 1
   }
  ],
  "grid_page_length": 50,
  "index_web_pages_for_search": 1,
  "is_submittable": 1,
  "links": [],
- "modified": "2025-12-23 11:44:32.174497",
+ "modified": "2025-12-25 10:20:11.594572",
  "modified_by": "Administrator",
  "module": "Library Management",
  "name": "Library Transaction",
