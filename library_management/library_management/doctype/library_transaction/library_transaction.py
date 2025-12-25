@@ -10,7 +10,28 @@ from frappe.model.document import Document
 
 class LibraryTransaction(Document):
 	def before_submit(self):
-		pass
+		if self.type == "Issue":
+			self.validate_issue()
+			article=frappe.get_doc("Article", self.article)
+			article.status = "Issued"
+			article.save()
+
+		if self.type == "Return":
+			self.validate_return()
+			article=frappe.get_doc("Article", self.article)
+			article.status = "Available"
+			article.save()
+
+	def validate_issue(self):
+		self.validate_membership()
+		article = frappe.get_doc("Article", self.article)
+		if article.status = "Issued":
+			frappe.throw("Article is already issued to another member")
+
+	def validate_return(self):
+		article = frappe.get_doc("Article", self.article)
+		if article.status = "Available":
+			frappe.throw("Article cannot be returned without being issued first")
 
 	def validate_membership(self):
 		valid_membership = frappe.db.exists(
@@ -23,4 +44,4 @@ class LibraryTransaction(Document):
 			},
 		)
 		if not valid_membership:
-			frappe.throw("The member doesn not have a valid membership")
+			frappe.throw("The member does not have a valid membership")
